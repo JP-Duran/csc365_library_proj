@@ -1,4 +1,4 @@
-# Library Database Project
+# 📚Library Database Project📚
 
 ### Members: Julian, Anson, Emmanuel, Alex
 
