@@ -2,7 +2,6 @@ package query_classes;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 
@@ -41,9 +40,11 @@ public class init_connection {
 
     }
 
-        /* Queries the user table for a password matching the given username
-         * RETURN: A ResultSet with 1 attribute 'upassword' which either contains 1 password or is null
-         */
+    /* Queries the user table for a password matching the given username
+    * PARAM: A String containing the username to be queried
+    * RETURN: A ResultSet with 1 attribute 'upassword' which contains 1 password if the
+    *         user is found or null if the user is not found
+    */
     public ResultSet user_login(String user_id) {
         try{    
             String user_id_query = "select Users.upassword from Users where uname = ?";
