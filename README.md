@@ -6,6 +6,13 @@
 #### Backend: Julian and Alex
 #### Frontend: Anson and Emmanuel
 
+### Priorities
+- Do the ui/queries for the login 
+- Do the queries/ui for the books
+
+### Second
+- displaying the user's/employee's account information
+
 ### Login
 - User/Emp login function input: pw and username strings, return T/F if theres a match
 
