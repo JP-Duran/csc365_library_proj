@@ -4,13 +4,8 @@ import java.sql.*;
 class Main {
     public static void main(String[] args) {
         init_connection con = new init_connection();
-        ResultSet rs = con.user_login("jonsnow");
-        try {
-            while (rs.next()) {
-                String pw = rs.getString("upassword");
-                System.out.println(pw);
-            }
-        } catch (Exception e) { e.printStackTrace(); }
+        System.out.println(con.user_login("teddy", "pw2"));
+        System.out.println(con.employee_login("employee1jac", "emppw2"));
         con.close();
     }
 }
