@@ -6,6 +6,9 @@
 #### Backend: Julian and Alex
 #### Frontend: Anson and Emmanuel
 
+### Login
+- User/Emp login function input: pw and username strings, return T/F if theres a match
+
 ### Frontend
 #### User interface (once they login)
 - Let them query the book database (book table)
