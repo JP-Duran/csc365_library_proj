@@ -79,4 +79,21 @@ public class init_connection {
         } catch (Exception e) { /*Ignore */ }
         return false;
     }
+
+    /*
+     * search book
+     * PARAMS: genre, book_title, isbn, lib_id
+     * ENUM GENRE: fiction, nonfiction, horror
+     */
+
+     /*
+      * add book
+      * PARAMS: genre, book_title, isbn, lib_id
+      */
+
+      /*
+       * personal info query
+       * PARAMS: id
+       * RETURN: personal info
+       */
 }
