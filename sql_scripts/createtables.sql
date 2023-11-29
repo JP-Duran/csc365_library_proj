@@ -23,10 +23,12 @@ available boolean,
 foreign key(lid) references Libraries(lid),
 foreign key (cardnum) references Users(cardnum) );
 
-create table Holds (
-hid integer primary key auto_increment,
-isbn VARCHAR(10),
-cardnum VARCHAR(16),
-hdate DATE,
-foreign key(isbn) references Books(isbn),
-foreign key(cardnum) references Users(cardnum) );
+#create table Holds (
+#hid integer primary key auto_increment,
+#isbn VARCHAR(10),
+#cardnum VARCHAR(16),
+#hdate DATE,
+#foreign key(isbn) references Books(isbn),
+#foreign key(cardnum) references Users(cardnum) );
+
+#drop table Holds;
