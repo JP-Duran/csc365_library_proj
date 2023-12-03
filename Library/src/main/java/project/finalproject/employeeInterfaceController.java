@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class employeeInterfaceController {
@@ -14,6 +15,13 @@ public class employeeInterfaceController {
     public Button SearchButton;
     public Button bookButton;
 
+    @FXML
+    private String userName = "";
+    private String password = "";
+    public void getData(String userName, String password){
+        this.userName = userName;
+        this.password = password;
+    }
     @FXML
     void onBackBttn(ActionEvent event)throws Exception {
         Stage stage = (Stage) BackButton.getScene().getWindow();
@@ -51,5 +59,19 @@ public class employeeInterfaceController {
         newStage.show();
 
     }
+
+    @FXML
+    void getInfo (ActionEvent event)throws Exception {
+        Stage stage = (Stage) infoButton.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        //add info here
+        FXMLLoader fxmlLoader = new FXMLLoader(projectApplication.class.getResource("employeeInfo.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 640, 400);
+        newStage.setTitle("Employee Screen!");
+        newStage.setScene(scene);
+        newStage.show();
+    }
+
 
 }

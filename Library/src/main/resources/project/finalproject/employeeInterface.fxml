@@ -47,7 +47,7 @@
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
-        <Menu mnemonicParsing="false" text="File">
+        <Menu mnemonicParsing="false">
           <items>
             <MenuItem mnemonicParsing="false" text="New" />
             <MenuItem mnemonicParsing="false" text="Open…" />
@@ -63,43 +63,24 @@
             <MenuItem mnemonicParsing="false" text="Quit" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: lightblue;" VBox.vgrow="ALWAYS">
          <children>
-            <Pane layoutX="220.0" layoutY="87.0" prefHeight="200.0" prefWidth="200.0">
+            <Pane layoutX="220.0" layoutY="114.0" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="bookButton" layoutX="63.0" layoutY="34.0" mnemonicParsing="false" onAction="#addBooks" text="Add Books" />
-                  <Button fx:id="SearchButton" layoutX="56.0" layoutY="88.0" mnemonicParsing="false" onAction="#onSearchBooks" text="Search Books" />
-                  <Button fx:id="infoButton" layoutX="37.0" layoutY="133.0" mnemonicParsing="false" text="Personal Information" />
+                  <Button fx:id="bookButton" layoutX="53.0" layoutY="14.0" mnemonicParsing="false" onAction="#addBooks" prefHeight="46.0" prefWidth="95.0" text="Add Books" />
+                  <Button fx:id="SearchButton" layoutX="41.0" layoutY="77.0" mnemonicParsing="false" onAction="#onSearchBooks" prefHeight="46.0" prefWidth="118.0" text="Search Books" />
+                  <Button fx:id="infoButton" layoutX="25.0" layoutY="142.0" mnemonicParsing="false" onAction="#getInfo" prefHeight="52.0" prefWidth="150.0" text="Personal Information" />
                </children>
             </Pane>
-            <Label layoutX="227.0" layoutY="49.0" prefHeight="50.0" prefWidth="186.0" text="Employee Controls">
+            <Label alignment="CENTER" layoutX="220.0" layoutY="49.0" prefHeight="52.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 30; -fx-border-color: black; -fx-border-radius: 30;" text="Employee Controls">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
+            <Button fx:id="BackButton" layoutY="343.0" mnemonicParsing="false" onAction="#onBackBttn" prefHeight="36.0" prefWidth="69.0" text="Back" />
          </children>
     </AnchorPane>
-      <Button fx:id="BackButton" mnemonicParsing="false" onAction="#onBackBttn" prefHeight="36.0" prefWidth="69.0" text="Back" />
   </children>
 </VBox>
