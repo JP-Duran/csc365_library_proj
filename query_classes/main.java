@@ -6,6 +6,7 @@ class Main {
         init_connection con = new init_connection();
         System.out.println(con.user_login("jonsnow", "pw1"));
         System.out.println(con.employee_login("employee1jac", "emppw2"));
+        System.out.println(con.search_book("", "book", null, null));
         con.close();
     }
 }
