@@ -38,12 +38,11 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.finalproject.searchBookController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.finalproject.employeeInfoController">
    <children>
       <MenuBar VBox.vgrow="NEVER">
          <menus>
@@ -67,21 +66,42 @@
       </MenuBar>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: lightblue;" VBox.vgrow="ALWAYS">
          <children>
-            <TextField fx:id="libID" layoutX="246.0" layoutY="238.0" />
-            <TextField fx:id="title" layoutX="246.0" layoutY="104.0" />
-            <Label layoutX="246.0" layoutY="87.0" prefHeight="17.0" prefWidth="100.0" text="Book Title" />
-            <Label layoutX="246.0" layoutY="179.0" prefHeight="17.0" prefWidth="100.0" text="Genre" />
-            <Label layoutX="246.0" layoutY="136.0" prefHeight="17.0" prefWidth="100.0" text="ISBN Number  " />
-            <TextField fx:id="genre" layoutX="246.0" layoutY="196.0" />
-            <TextField fx:id="isbn" layoutX="246.0" layoutY="153.0" />
-            <Label layoutX="246.0" layoutY="221.0" prefHeight="17.0" prefWidth="100.0" text="Library ID" />
-            <Label alignment="CENTER" layoutX="200.0" layoutY="33.0" prefHeight="39.0" prefWidth="241.0" style="-fx-background-color: white; -fx-background-radius: 30; -fx-border-radius: 30; -fx-border-color: black;" text="Search for Books" textAlignment="CENTER">
+            <Label layoutX="193.0" layoutY="49.0" prefHeight="50.0" prefWidth="254.0" style="-fx-background-color: white; -fx-background-radius: 30; -fx-border-color: black; -fx-border-radius: 30;" text="   Employee Information">
                <font>
-                  <Font size="27.0" />
+                  <Font size="22.0" />
                </font>
             </Label>
-            <Button fx:id="SearchButton" layoutX="265.0" layoutY="292.0" mnemonicParsing="false" onAction="#onSearchBook" prefHeight="39.0" prefWidth="110.0" text="Search" />
-            <Button fx:id="BackButton" layoutY="346.0" mnemonicParsing="false" onAction="#onBackBttn" prefHeight="31.0" prefWidth="57.0" text="Back" />
+            <Label layoutX="143.0" layoutY="144.0" prefHeight="50.0" prefWidth="105.0" text="Password:">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="143.0" layoutY="99.0" prefHeight="50.0" prefWidth="97.0" text="Login ID:">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="143.0" layoutY="187.0" prefHeight="50.0" prefWidth="105.0" text="Location:">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="240.0" layoutY="99.0" prefHeight="50.0" prefWidth="105.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="248.0" layoutY="144.0" prefHeight="50.0" prefWidth="105.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="240.0" layoutY="187.0" prefHeight="50.0" prefWidth="105.0">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Button fx:id="BackButton" layoutY="339.0" mnemonicParsing="false" onAction="#onBackBttn" prefHeight="36.0" prefWidth="69.0" text="Back" />
          </children>
       </AnchorPane>
    </children>

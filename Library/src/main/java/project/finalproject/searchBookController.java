@@ -50,7 +50,7 @@ public class searchBookController {
 
         //else open the user interface. controller: userInterFaceController
         Stage newStage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(projectApplication.class.getResource("searchbook.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(projectApplication.class.getResource("searchedBooks.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 640, 400);
         newStage.setTitle("Search Window");
         newStage.setScene(scene);

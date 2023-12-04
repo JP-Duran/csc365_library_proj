@@ -49,7 +49,7 @@
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
-        <Menu mnemonicParsing="false" text="File">
+        <Menu mnemonicParsing="false">
           <items>
             <MenuItem mnemonicParsing="false" text="New" />
             <MenuItem mnemonicParsing="false" text="Open…" />
@@ -65,30 +65,11 @@
             <MenuItem mnemonicParsing="false" text="Quit" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: lightblue;" VBox.vgrow="ALWAYS">
          <children>
-            <Pane layoutX="151.0" layoutY="89.0" prefHeight="209.0" prefWidth="339.0">
+            <Pane layoutX="157.0" layoutY="89.0" prefHeight="209.0" prefWidth="339.0">
                <children>
                   <TextField fx:id="usernameTxt" layoutX="85.0" layoutY="59.0" />
                   <Label layoutX="68.0" layoutY="27.0" text="Username">
@@ -105,13 +86,13 @@
                   <Button fx:id="loginButton" layoutX="98.0" layoutY="170.0" mnemonicParsing="false" onAction="#onLoginBttn" prefHeight="32.0" prefWidth="124.0" text="Login" />
                </children>
             </Pane>
-            <Label layoutX="214.0" layoutY="57.0" text="Employee Login">
+            <Button fx:id="BackButton" layoutY="345.0" mnemonicParsing="false" onAction="#onBackBttn" prefHeight="32.0" prefWidth="124.0" text="Back" />
+            <Label alignment="CENTER" layoutX="226.0" layoutY="49.0" prefHeight="40.0" prefWidth="189.0" style="-fx-background-color: white; -fx-background-radius: 30; -fx-border-color: black; -fx-border-radius: 30;" text="Employee Login">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
          </children>
     </AnchorPane>
-      <Button fx:id="BackButton" mnemonicParsing="false" onAction="#onBackBttn" prefHeight="32.0" prefWidth="124.0" text="Back" />
   </children>
 </VBox>
