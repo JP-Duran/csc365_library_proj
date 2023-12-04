@@ -173,20 +173,20 @@ public class init_connection {
     /*
     * personal info query
     * PARAMS: empid
-    * RETURN: ArrayList of Strings containing [lid, emppassword], or null if employee not found
+    * RETURN: ArrayList of Strings containing [llocation, emppassword], or null if employee not found
     */
     public ArrayList<String> personal_info_query(String empid) {
         ArrayList<String> info = new ArrayList<>();
         try {
-            String info_query = "select lid, emppassword from Employees where empid = ?";
+            String info_query = "select Libraries.llocation, Employees.emppassword from Employees join Libraries on Employees.lid = Libraries.lid where Employees.empid = ?";
             PreparedStatement prepared_query = connect.prepareStatement(info_query);
             prepared_query.setString(1, empid);
-            result = prepared_query.executeQuery();
+            ResultSet result = prepared_query.executeQuery();
             if (!result.next()) { return null; }
-            while (result.next()) {
-                info.add(result.getString("lid"));
+            do {
+                info.add(result.getString("llocation"));
                 info.add(result.getString("emppassword"));
-            }
+            } while (result.next());
         } catch (Exception e) { /*Ignore */ }
         return info;
     }
