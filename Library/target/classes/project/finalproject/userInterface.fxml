@@ -22,13 +22,17 @@
         </Pane>
         <Pane layoutY="40.0" prefHeight="109.0" prefWidth="736.0">
             <children>
-                <Label layoutY="2.0" prefHeight="25.0" prefWidth="80.0" text="Book Name:" />
+                <Label fx:id="llLabel" layoutX="309.0" layoutY="91.0" prefHeight="25.0" prefWidth="143.0" text="Library Location:               " />
                 <ChoiceBox fx:id="locationChoice" layoutX="309.0" layoutY="30.0" prefHeight="25.0" prefWidth="143.0" />
                 <ChoiceBox fx:id="genreChoice" layoutX="156.0" layoutY="30.0" prefHeight="25.0" prefWidth="143.0" />
                 <TextField fx:id="bkNameTxt" layoutY="30.0" />
                 <Label layoutX="156.0" layoutY="2.0" prefHeight="25.0" prefWidth="143.0" text="Genre:" />
                 <Label layoutX="309.0" layoutY="2.0" prefHeight="25.0" prefWidth="143.0" text="Library Location:" />
                 <Button layoutX="463.0" layoutY="30.0" mnemonicParsing="false" onAction="#searchOnAction" text="Search" />
+            <Label fx:id="bkLbl" layoutY="95.0" prefHeight="17.0" prefWidth="143.0" text="Book Name:                      " />
+            <Label fx:id="gLbl" layoutX="156.0" layoutY="95.0" prefHeight="17.0" prefWidth="143.0" text="Genre:                               " />
+            <Label layoutY="6.0" text="Book Name:" />
+            <Button layoutX="525.0" layoutY="30.0" mnemonicParsing="false" onAction="#clearOnAction" text="Clear" />
             </children></Pane>
         <BorderPane fx:id="resultsBorderPane" layoutY="149.0" prefHeight="304.0" prefWidth="736.0" />
     </children>
