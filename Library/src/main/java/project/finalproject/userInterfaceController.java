@@ -249,12 +249,23 @@ public class userInterfaceController implements Initializable {
                 bkName.setText(resultSet.getString("bname"));
                 genreName.setText(resultSet.getString("genre"));
                 libName.setText(get_library_name(Integer.parseInt(resultSet.getString("lid"))));
-                if (bkName.getText().length() < bkLbl.getText().length())
-                    bkName.setText(format(bkName.getText(),32 - bkName.getText().length()));
-                if (genreName.getText().length() < gLbl.getText().length())
-                    genreName.setText(padRight(genreName.getText(), gLbl.getText().length()));
-                if (libName.getText().length() < llLabel.getText().length())
-                    libName.setText(padRight(libName.getText(), llLabel.getText().length()));
+                bkName.setStyle("-fx-font-family: Monospaced");
+                genreName.setStyle("-fx-font-family: Monospaced");
+                libName.setStyle("-fx-font-family: Monospaced");
+                if (bkName.getText().length() >= bkLbl.getText().length()){
+                    bkName.setText(bkName.getText().substring(0,bkLbl.getText().length()-4) + "...");
+                }
+                if (bkName.getText().length() <= bkLbl.getText().length()){
+                    bkName.setText(format(bkName.getText(),
+                            bkLbl.getText().length() - bkName.getText().length() + 2));
+
+                }
+                if (genreName.getText().length() <= gLbl.getText().length())
+                    genreName.setText(format(genreName.getText(),
+                            gLbl.getText().length() - genreName.getText().length() + 3));
+                if (libName.getText().length() <= llLabel.getText().length())
+                    libName.setText(format(libName.getText(),
+                            llLabel.getText().length() - libName.getText().length()));
                 hBox.getChildren().addAll(bkName,genreName,libName,button);
                 hBox.setPrefWidth(BOXWIDTH);
                 hBox.setPrefHeight(HBOXHEIGHT);
@@ -262,6 +273,7 @@ public class userInterfaceController implements Initializable {
                 System.out.println(resultSet.getString("isbn") + "  " + resultSet.getString("bname") +
                         "  " + resultSet.getString("genre"));
             }
+            System.out.println(bkcount);
             if (bkcount == 0){
                 notifications.alertOk("","No books found");
             }
