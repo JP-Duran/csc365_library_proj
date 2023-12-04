@@ -44,15 +44,16 @@ public class addBookController {
     public boolean add_book(String genre, String book_title, String isbn, Integer lid) {
         try {
             genre = genre.toLowerCase();
-            if (!validGenres.contains(genre)) {
+            if (!validGenres.contains(genre) || book_title == null || isbn == null || lid == null) {
                 return false;
             }
-            String add_book_query = "insert into Books (genre, bname, isbn, lid) values (?, ?, ?, ?)";
+            String add_book_query = "insert into Books (genre, bname, isbn, lid, available) values (?, ?, ?, ?, ?)";
             PreparedStatement prepared_query = connect.prepareStatement(add_book_query);
             prepared_query.setString(1, genre);
             prepared_query.setString(2, book_title);
             prepared_query.setString(3, isbn);
             prepared_query.setInt(4, lid);
+            prepared_query.setInt(5, 1);
             int rows_affected = prepared_query.executeUpdate();
             if (rows_affected > 0) return true;
         } catch (Exception e) { /*Ignore */ }
