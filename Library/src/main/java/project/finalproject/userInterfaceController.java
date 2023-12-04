@@ -366,4 +366,32 @@ public class userInterfaceController implements Initializable {
         return libraryName;
     }
 
+    /*
+     * check out a book
+     * PARAMS: card_number, isbn
+     * RETURN: true if book is checked out, false if book doesn't exist or is already checked out
+     */
+    public boolean check_out_book(String card_number, String isbn) {
+        try {
+            // Check if the book exists and is available
+            String check_book_query = "select * from Books where isbn = ? and available = 1";
+            PreparedStatement prepared_query = connect.prepareStatement(check_book_query);
+            prepared_query.setString(1, isbn);
+            ResultSet result = prepared_query.executeQuery();
+            if (!result.next()) {
+                // The book doesn't exist or is not available
+                return false;
+            }
+
+            // The book exists and is available, so check it out
+            String check_out_query = "update Books set cardnum = ?, available = 0 where isbn = ?";
+            prepared_query = connect.prepareStatement(check_out_query);
+            prepared_query.setString(1, card_number);
+            prepared_query.setString(2, isbn);
+            int rows_affected = prepared_query.executeUpdate();
+            if (rows_affected > 0) return true;
+        } catch (Exception e) { /*Ignore */ }
+        return false;
+    }
+
 }
