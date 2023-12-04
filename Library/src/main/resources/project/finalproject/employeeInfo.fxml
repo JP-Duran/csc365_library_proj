@@ -86,17 +86,17 @@
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label layoutX="240.0" layoutY="99.0" prefHeight="50.0" prefWidth="105.0">
+            <Label fx:id="id" layoutX="240.0" layoutY="99.0" prefHeight="50.0" prefWidth="291.0">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label layoutX="248.0" layoutY="144.0" prefHeight="50.0" prefWidth="105.0">
+            <Label fx:id="pw" layoutX="248.0" layoutY="144.0" prefHeight="50.0" prefWidth="291.0">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label layoutX="240.0" layoutY="187.0" prefHeight="50.0" prefWidth="105.0">
+            <Label fx:id="loc" layoutX="248.0" layoutY="187.0" prefHeight="50.0" prefWidth="291.0">
                <font>
                   <Font size="22.0" />
                </font>

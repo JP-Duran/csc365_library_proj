@@ -8,6 +8,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import static project.finalproject.projectApplication.connect;
+
 public class addBookController {
 
     public Button BackButton;
@@ -23,7 +29,7 @@ public class addBookController {
 
     @FXML
     private TextField title;
-
+    ArrayList<String> validGenres = new ArrayList<>(Arrays.asList("fiction", "nonfiction", "mystery", "romance", "fantasy"));
     @FXML
     void onBackBttn(ActionEvent event)throws Exception {
         Stage stage = (Stage) BackButton.getScene().getWindow();
@@ -35,7 +41,23 @@ public class addBookController {
         newStage.setScene(scene);
         newStage.show();
     }
-
+    public boolean add_book(String genre, String book_title, String isbn, Integer lid) {
+        try {
+            genre = genre.toLowerCase();
+            if (!validGenres.contains(genre)) {
+                return false;
+            }
+            String add_book_query = "insert into Books (genre, bname, isbn, lid) values (?, ?, ?, ?)";
+            PreparedStatement prepared_query = connect.prepareStatement(add_book_query);
+            prepared_query.setString(1, genre);
+            prepared_query.setString(2, book_title);
+            prepared_query.setString(3, isbn);
+            prepared_query.setInt(4, lid);
+            int rows_affected = prepared_query.executeUpdate();
+            if (rows_affected > 0) return true;
+        } catch (Exception e) { /*Ignore */ }
+        return false;
+    }
     @FXML
     void insertBook (ActionEvent event)throws Exception {
         Stage stage = (Stage) addButton.getScene().getWindow();
@@ -45,9 +67,16 @@ public class addBookController {
         String bISBN = isbn.getText().strip();
         String bGenre = genre.getText().strip();
         String bLibID = libID.getText().strip();
+        if(add_book(bGenre, bTitle, bISBN, Integer.valueOf(bLibID)))
+        {
+            Notifications alert = new Notifications();
+            alert.alertOk("New Book", "A new book has been added!");
+        }
+        else{
+            Notifications alert = new Notifications();
+            alert.alertOk("Error", "Something went wrong!");
+        }
 
-        Notifications alert = new Notifications();
-        alert.alertOk("New Book", "A new book has been added!");
 
         //else open the user interface. controller: userInterFaceController
         Stage newStage = new Stage();

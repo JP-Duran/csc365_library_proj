@@ -8,6 +8,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.sql.PreparedStatement;
+
+import static project.finalproject.projectApplication.connect;
+
 public class searchBookController {
 
     public Button BackButton;
@@ -36,23 +40,38 @@ public class searchBookController {
         newStage.show();
     }
 
+    public boolean remove_book(String isbn) {
+        try {
+            String remove_book_query = "delete from Books where isbn = ?";
+            PreparedStatement prepared_query = connect.prepareStatement(remove_book_query);
+            prepared_query.setString(1, isbn);
+            int rows_affected = prepared_query.executeUpdate();
+            if (rows_affected > 0) return true;
+        } catch (Exception e) { /*Ignore */ }
+        return false;
+    }
+
     @FXML
     void onSearchBook(ActionEvent event) throws Exception {
         Stage stage = (Stage) SearchButton.getScene().getWindow();
         stage.close();
         //get the userName and password entered
-        String bTitle = title.getText().strip();
         String bISBN = isbn.getText().strip();
-        String bGenre = genre.getText().strip();
-        String bLibID = libID.getText().strip();
-
         //Look up book from database
-
+        if(remove_book(bISBN))
+        {
+            Notifications alert = new Notifications();
+            alert.alertOk("Remove Book", "Book with ISBN:" + bISBN + " has been removed.");
+        }
+        else{
+            Notifications alert = new Notifications();
+            alert.alertOk("Error", "Something went wrong!");
+        }
         //else open the user interface. controller: userInterFaceController
         Stage newStage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(projectApplication.class.getResource("searchedBooks.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(projectApplication.class.getResource("searchbook.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 640, 400);
-        newStage.setTitle("Search Window");
+        newStage.setTitle("Remove Window");
         newStage.setScene(scene);
         newStage.show();
 
