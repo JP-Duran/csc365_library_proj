@@ -2,21 +2,20 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="241.0" prefWidth="364.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.finalproject.userAccountController">
+<AnchorPane fx:id="backGroundAnchor" prefHeight="235.0" prefWidth="364.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.finalproject.userAccountController">
    <children>
-      <Label layoutY="5.0" prefHeight="18.0" prefWidth="202.0" text=" Employee ID:">
+      <Label layoutY="5.0" prefHeight="18.0" prefWidth="202.0" text="Library Card Number">
          <font>
             <Font name="Bell MT Bold" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="empIDTxt" layoutY="27.0" prefHeight="26.0" prefWidth="364.0" />
-      <TextField fx:id="locationTxt" layoutY="92.0" prefHeight="26.0" prefWidth="364.0" />
-      <TextField fx:id="passwordTxt" layoutX="-2.0" layoutY="153.0" prefHeight="26.0" prefWidth="364.0" />
-      <Label layoutY="70.0" text=" Work Location">
+      <TextField fx:id="libCardNumTxt" layoutY="27.0" prefHeight="26.0" prefWidth="364.0" />
+      <Label layoutY="70.0" text="Current Password">
          <font>
             <Font name="Bell MT Bold" size="18.0" />
          </font>
@@ -26,6 +25,10 @@
             <Font name="Bell MT Bold" size="18.0" />
          </font>
       </Label>
-      <Button layoutX="308.0" layoutY="189.0" mnemonicParsing="false" onAction="#onResetBttn" text="Reset" />
+      <Button fx:id="resetButton" layoutX="319.0" layoutY="209.0" mnemonicParsing="false" onAction="#onResetBttn" text="Reset" />
+      <Button fx:id="backButton" layoutY="209.0" mnemonicParsing="false" onAction="#onBackAction" text="Back" />
+      <PasswordField fx:id="currPassTxt" layoutY="94.0" prefHeight="25.0" prefWidth="364.0" />
+      <PasswordField fx:id="resetPassTxt" layoutY="152.0" prefHeight="25.0" prefWidth="364.0" />
+      <Label fx:id="infoLbl" layoutY="177.0" prefHeight="27.0" prefWidth="364.0" textFill="RED" />
    </children>
 </AnchorPane>
