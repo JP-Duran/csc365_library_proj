@@ -275,6 +275,10 @@ public class userInterfaceController implements Initializable {
             }
             System.out.println(bkcount);
             if (bkcount == 0){
+                scrollPane.setOpacity(0);
+                bkLbl.setOpacity(0);
+                gLbl.setOpacity(0);
+                llLabel.setOpacity(0);
                 notifications.alertOk("","No books found");
             }
             else if (bkcount < 9){
@@ -289,7 +293,13 @@ public class userInterfaceController implements Initializable {
                 resultVBox.getChildren().add(hBox);
             }
         }
-        catch (Exception e){notifications.alertOk("","No books found");}
+        catch (Exception e){
+            scrollPane.setOpacity(0);
+            bkLbl.setOpacity(0);
+            gLbl.setOpacity(0);
+            llLabel.setOpacity(0);
+            notifications.alertOk("","No books found");
+        }
     }
 
     private void buttonsAllClick(javafx.scene.input.MouseEvent mouseEvent) {
