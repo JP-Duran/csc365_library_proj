@@ -222,8 +222,9 @@ public class userInterfaceController implements Initializable {
         gLbl.setOpacity(100);
         llLabel.setOpacity(100);
         boolean green = false;
-        ResultSet resultSet = search_book(genre,bookName,"",libLocation);
         Notifications notifications = new Notifications();
+
+        ResultSet resultSet = search_book(genre,bookName,"",libLocation);
         int bkcount = 0;
         try{
             resultVBox.getChildren().clear();
@@ -245,19 +246,35 @@ public class userInterfaceController implements Initializable {
                     hBox.setStyle("-fx-background-color: A9D3FF");
                     green = true;
                 }
+
                 bkName.setText(resultSet.getString("bname"));
                 genreName.setText(resultSet.getString("genre"));
                 libName.setText(get_library_name(Integer.parseInt(resultSet.getString("lid"))));
                 bkName.setStyle("-fx-font-family: Monospaced");
                 genreName.setStyle("-fx-font-family: Monospaced");
                 libName.setStyle("-fx-font-family: Monospaced");
+                if (resultSet.getString("available").equals("1"))
+                    hBox.getChildren().addAll(bkName,genreName,libName,button);
+                else{
+                    if (resultSet.getString("cardNum").equals(libCardNum)){
+                        //add code to return book
+                        Button buttonReturn = new Button("Return");
+                        buttonReturn.setOnMouseClicked(this::returnClick);
+                        hBox.getChildren().addAll(bkName,genreName,libName,buttonReturn);
+                    }
+                    else{
+                        Label label = new Label("Checked out");
+                        label.setTextFill(Color.DARKBLUE);
+                        hBox.getChildren().addAll(bkName,genreName,libName,label);
+                    }
+                }
+
                 if (bkName.getText().length() >= bkLbl.getText().length()){
                     bkName.setText(bkName.getText().substring(0,bkLbl.getText().length()-4) + "...");
                 }
                 if (bkName.getText().length() <= bkLbl.getText().length()){
                     bkName.setText(format(bkName.getText(),
                             bkLbl.getText().length() - bkName.getText().length() + 2));
-
                 }
                 if (genreName.getText().length() <= gLbl.getText().length())
                     genreName.setText(format(genreName.getText(),
@@ -265,7 +282,6 @@ public class userInterfaceController implements Initializable {
                 if (libName.getText().length() <= llLabel.getText().length())
                     libName.setText(format(libName.getText(),
                             llLabel.getText().length() - libName.getText().length()));
-                hBox.getChildren().addAll(bkName,genreName,libName,button);
                 hBox.setPrefWidth(BOXWIDTH);
                 hBox.setPrefHeight(HBOXHEIGHT);
                 resultVBox.getChildren().add(hBox);
@@ -305,14 +321,28 @@ public class userInterfaceController implements Initializable {
         //enter sql query to check out the book
         Button currentButton = (Button) mouseEvent.getSource();
         check_out_book(libCardNum,currentButton.getId());
+        Button buttonReturn = new Button("Return");
+        buttonReturn.setId(currentButton.getId());
+        //
         HBox hBox = (HBox) currentButton.getParent();
         hBox.getChildren().remove(currentButton);
-        Label label = new Label("Checked out");
-        label.setTextFill(Color.DARKBLUE);
-        hBox.getChildren().add(label);
+        //Label label = new Label("Checked out");
+        //label.setTextFill(Color.DARKBLUE);
+        buttonReturn.setOnMouseClicked(this::returnClick);
+        hBox.getChildren().add(buttonReturn);
         Notifications notifications = new Notifications();
         notifications.alertOk("Book Status", "Book has been checked out");
-        System.out.println(currentButton.getId());
+    }
+    private void returnClick(javafx.scene.input.MouseEvent mouseEvent){
+        Button currentButton = (Button) mouseEvent.getSource();
+        Notifications notifications = new Notifications();
+        notifications.alertOk("Book Status", "Book has been returned");
+        Button buttonCheckOut = new Button("Checkout");
+        buttonCheckOut.setId(currentButton.getId());
+        buttonCheckOut.setOnMouseClicked(this::buttonsAllClick);
+        HBox hBox = (HBox) currentButton.getParent();
+        hBox.getChildren().remove(currentButton);
+        hBox.getChildren().add(buttonCheckOut);
     }
 
     @FXML
@@ -332,7 +362,7 @@ public class userInterfaceController implements Initializable {
         return String.format("%-" + n + "s", s);
     }
 
-
+    //region SQL
     public ResultSet search_book(String genre, String book_title, String isbn, Integer lib_id) {
         try {
             ResultSet result;
@@ -403,5 +433,5 @@ public class userInterfaceController implements Initializable {
         } catch (Exception e) { /*Ignore */ }
         return false;
     }
-
+    //endregion
 }
