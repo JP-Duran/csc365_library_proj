@@ -209,5 +209,24 @@ public class init_connection {
         } catch (Exception e) { /*Ignore */ }
         return libraryName;
     }
+
+    /*
+    * get library id
+    * PARAMS: llocation
+    * RETURN: library id as an Integer, or null if library not found
+    */
+    public Integer get_library_id(String llocation) {
+        Integer libraryId = null;
+        try {
+            String library_query = "select lid from Libraries where llocation = ?";
+            PreparedStatement prepared_query = connect.prepareStatement(library_query);
+            prepared_query.setString(1, llocation);
+            ResultSet result = prepared_query.executeQuery();
+            if (result.next()) {
+                libraryId = result.getInt("lid");
+            }
+        } catch (Exception e) { /*Ignore */ }
+        return libraryId;
+    }
 }
 
