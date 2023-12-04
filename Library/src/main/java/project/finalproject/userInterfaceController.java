@@ -181,8 +181,6 @@ public class userInterfaceController implements Initializable {
             showResults(tempBKName,tempGenre,libLocationID);
         }
 
-
-
         /*
         if (!genreChoice.getValue().equals("NONE"))
         {
@@ -237,6 +235,7 @@ public class userInterfaceController implements Initializable {
                 Label genreName = new Label();
                 Label libName = new Label();
                 Button button = new Button("Checkout");
+                button.setId(resultSet.getString("isbn"));
                 button.setOnMouseClicked(this::buttonsAllClick);
                 if (green) {
                     hBox.setBackground(new Background(bgfill));
@@ -303,15 +302,16 @@ public class userInterfaceController implements Initializable {
     }
 
     private void buttonsAllClick(javafx.scene.input.MouseEvent mouseEvent) {
-        Button currentButton = (Button) mouseEvent.getSource();
-        Notifications notifications = new Notifications();
-        notifications.alertOk("Book Status", "Book has been checked out");
         //enter sql query to check out the book
+        Button currentButton = (Button) mouseEvent.getSource();
+        check_out_book(libCardNum,currentButton.getId());
         HBox hBox = (HBox) currentButton.getParent();
         hBox.getChildren().remove(currentButton);
         Label label = new Label("Checked out");
         label.setTextFill(Color.DARKBLUE);
         hBox.getChildren().add(label);
+        Notifications notifications = new Notifications();
+        notifications.alertOk("Book Status", "Book has been checked out");
         System.out.println(currentButton.getId());
     }
 
