@@ -8,6 +8,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+import static project.finalproject.projectApplication.connect;
+
 public class employeeInterfaceController {
 
     public Button BackButton;
@@ -15,13 +21,8 @@ public class employeeInterfaceController {
     public Button SearchButton;
     public Button bookButton;
 
-    @FXML
-    private String userName = "";
-    private String password = "";
-    public void getData(String userName, String password){
-        this.userName = userName;
-        this.password = password;
-    }
+
+
     @FXML
     void onBackBttn(ActionEvent event)throws Exception {
         Stage stage = (Stage) BackButton.getScene().getWindow();

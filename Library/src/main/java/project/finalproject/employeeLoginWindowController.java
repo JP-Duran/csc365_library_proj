@@ -27,11 +27,13 @@ public class employeeLoginWindowController {
     @FXML
     private TextField usernameTxt;
     @FXML
-    private String userName = "";
-    private String password = "";
-    public void getData(String userName, String password){
-        this.userName = userName;
-        this.password = password;
+    private static String userName = "";
+    private static String password = "";
+    public static String getUser(){
+        return userName;
+    }
+    public static String getpw(){
+        return password;
     }
 
     @FXML

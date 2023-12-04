@@ -70,7 +70,7 @@
             <Pane layoutX="220.0" layoutY="114.0" prefHeight="200.0" prefWidth="200.0">
                <children>
                   <Button fx:id="bookButton" layoutX="53.0" layoutY="14.0" mnemonicParsing="false" onAction="#addBooks" prefHeight="46.0" prefWidth="95.0" text="Add Books" />
-                  <Button fx:id="SearchButton" layoutX="41.0" layoutY="77.0" mnemonicParsing="false" onAction="#onSearchBooks" prefHeight="46.0" prefWidth="118.0" text="Search Books" />
+                  <Button fx:id="SearchButton" layoutX="41.0" layoutY="77.0" mnemonicParsing="false" onAction="#onSearchBooks" prefHeight="46.0" prefWidth="118.0" text="Remove Books" />
                   <Button fx:id="infoButton" layoutX="25.0" layoutY="142.0" mnemonicParsing="false" onAction="#getInfo" prefHeight="52.0" prefWidth="150.0" text="Personal Information" />
                </children>
             </Pane>
