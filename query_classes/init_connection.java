@@ -111,7 +111,7 @@ public class init_connection {
     public boolean add_book(String genre, String book_title, String isbn, Integer lid) {
         try {
             genre = genre.toLowerCase();
-            if (!validGenres.contains(genre)) {
+            if (!validGenres.contains(genre) || genre == null || book_title == null || isbn == null || lid == null) {
                 return false;
             }
             String add_book_query = "insert into Books (genre, bname, isbn, lid) values (?, ?, ?, ?)";
@@ -125,7 +125,23 @@ public class init_connection {
         } catch (Exception e) { /*Ignore */ }
         return false;
     }
-    
+
+    /*
+    * remove book
+    * PARAMS: isbn
+    * RETURN: true if removal successful, false if failure
+    */
+    public boolean remove_book(String isbn) {
+        try {
+            String remove_book_query = "delete from Books where isbn = ?";
+            PreparedStatement prepared_query = connect.prepareStatement(remove_book_query);
+            prepared_query.setString(1, isbn);
+            int rows_affected = prepared_query.executeUpdate();
+            if (rows_affected > 0) return true;
+        } catch (Exception e) { /*Ignore */ }
+        return false;
+    }
+
     /*
     * personal info query
     * PARAMS: empid
