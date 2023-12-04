@@ -94,7 +94,7 @@ public class init_connection {
             String book_query = "select * from Books where genre like ? and bname like ? and isbn like ? and lid like ?";
             PreparedStatement prepared_query = connect.prepareStatement(book_query);
             prepared_query.setString(1, genre.isEmpty() ? "%" : genre);
-            prepared_query.setString(2, book_title.isEmpty() ? "%" : book_title);
+            prepared_query.setString(2, book_title.isEmpty() ? "%" : "%" + book_title + "%");
             prepared_query.setString(3, isbn.isEmpty() ? "%" : isbn);
             prepared_query.setString(4, lib_id == null ? "%" : lib_id.toString());
             result = prepared_query.executeQuery();
