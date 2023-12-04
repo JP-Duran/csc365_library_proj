@@ -76,6 +76,7 @@ public class userAccountController {
             infoLbl.setText("Password has been reset successfully");
             String oldPass = currPassTxt.getText().strip();
             password = resetPassTxt.getText().strip();
+            //sql to update the database
             /*
             enter sql query to update the user's password
              */
