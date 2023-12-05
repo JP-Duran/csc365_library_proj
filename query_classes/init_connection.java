@@ -74,11 +74,28 @@ public class init_connection {
             String emp_id_query = "select Employees.emppassword from Employees where empid = ?";
             PreparedStatement prepared_query = connect.prepareStatement(emp_id_query);
             prepared_query.setString(1, emp_id);
-            result = prepared_query.executeQuery();
+            ResultSet result = prepared_query.executeQuery();
             // This will throw exception if employee does not exist
             result.next();
             // System.out.println(result.getString("emppassword"));
             if (emp_pw.equals(result.getString("emppassword"))) return true;
+        } catch (Exception e) { /*Ignore */ }
+        return false;
+    }
+
+    /*
+    * update user password
+    * PARAMS: cardNum, newPassword
+    * RETURN: true if update successful, false otherwise
+    */
+    public boolean update_user_password(String card_number, String new_pw) {
+        try {
+            String update_password_query = "update Users set upassword = ? where cardNum = ?";
+            PreparedStatement prepared_query = connect.prepareStatement(update_password_query);
+            prepared_query.setString(1, new_pw);
+            prepared_query.setString(2, card_number);
+            int rows_affected = prepared_query.executeUpdate();
+            if (rows_affected > 0) return true;
         } catch (Exception e) { /*Ignore */ }
         return false;
     }
@@ -97,7 +114,7 @@ public class init_connection {
             prepared_query.setString(2, book_title.isEmpty() ? "%" : "%" + book_title + "%");
             prepared_query.setString(3, isbn.isEmpty() ? "%" : isbn);
             prepared_query.setString(4, lib_id == null ? "%" : lib_id.toString());
-            result = prepared_query.executeQuery();
+            ResultSet result = prepared_query.executeQuery();
             return result;
         } catch (Exception e) { /*Ignore */ }
         return null;
@@ -149,21 +166,26 @@ public class init_connection {
     */
     public boolean check_out_book(String card_number, String isbn) {
         try {
-            // Check if the book exists and is available
-            String check_book_query = "select * from Books where isbn = ? and available = 1";
-            PreparedStatement prepared_query = connect.prepareStatement(check_book_query);
-            prepared_query.setString(1, isbn);
-            ResultSet result = prepared_query.executeQuery();
-            if (!result.next()) {
-                // The book doesn't exist or is not available
-                return false;
-            }
-
-            // The book exists and is available, so check it out
-            String check_out_query = "update Books set cardnum = ?, available = 0 where isbn = ?";
-            prepared_query = connect.prepareStatement(check_out_query);
+            String check_out_query = "update Books set cardnum = ?, available = 0 where isbn = ? and available = 1";
+            PreparedStatement prepared_query = connect.prepareStatement(check_out_query);
             prepared_query.setString(1, card_number);
             prepared_query.setString(2, isbn);
+            int rows_affected = prepared_query.executeUpdate();
+            if (rows_affected > 0) return true;
+        } catch (Exception e) { /*Ignore */ }
+        return false;
+    }
+
+    /*
+    * return a book
+    * PARAMS: isbn
+    * RETURN: true if book is returned, false if book doesn't exist or other error
+    */
+    public boolean return_book(String isbn) {
+        try {
+            String return_book_query = "update Books set cardnum = null, available = 1 where isbn = ? and available = 0";
+            PreparedStatement prepared_query = connect.prepareStatement(return_book_query);
+            prepared_query.setString(1, isbn);
             int rows_affected = prepared_query.executeUpdate();
             if (rows_affected > 0) return true;
         } catch (Exception e) { /*Ignore */ }
