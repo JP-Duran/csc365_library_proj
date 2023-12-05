@@ -259,6 +259,7 @@ public class userInterfaceController implements Initializable {
                     if (resultSet.getString("cardNum").equals(libCardNum)){
                         //add code to return book
                         Button buttonReturn = new Button("Return");
+                        buttonReturn.setId(resultSet.getString("isbn"));
                         buttonReturn.setOnMouseClicked(this::returnClick);
                         hBox.getChildren().addAll(bkName,genreName,libName,buttonReturn);
                     }
@@ -285,8 +286,6 @@ public class userInterfaceController implements Initializable {
                 hBox.setPrefWidth(BOXWIDTH);
                 hBox.setPrefHeight(HBOXHEIGHT);
                 resultVBox.getChildren().add(hBox);
-                System.out.println(resultSet.getString("isbn") + "  " + resultSet.getString("bname") +
-                        "  " + resultSet.getString("genre"));
             }
             System.out.println(bkcount);
             if (bkcount == 0){
@@ -323,7 +322,6 @@ public class userInterfaceController implements Initializable {
         check_out_book(libCardNum,currentButton.getId());
         Button buttonReturn = new Button("Return");
         buttonReturn.setId(currentButton.getId());
-        //
         HBox hBox = (HBox) currentButton.getParent();
         hBox.getChildren().remove(currentButton);
         //Label label = new Label("Checked out");
@@ -343,6 +341,7 @@ public class userInterfaceController implements Initializable {
         HBox hBox = (HBox) currentButton.getParent();
         hBox.getChildren().remove(currentButton);
         hBox.getChildren().add(buttonCheckOut);
+        System.out.println(return_book(currentButton.getId()));
     }
 
     @FXML
@@ -417,6 +416,22 @@ public class userInterfaceController implements Initializable {
             PreparedStatement prepared_query = connect.prepareStatement(check_out_query);
             prepared_query.setString(1, card_number);
             prepared_query.setString(2, isbn);
+            int rows_affected = prepared_query.executeUpdate();
+            if (rows_affected > 0) return true;
+        } catch (Exception e) { /*Ignore */ }
+        return false;
+    }
+
+    /*
+     * return a book
+     * PARAMS: isbn
+     * RETURN: true if book is returned, false if book doesn't exist or other error
+     */
+    public boolean return_book(String isbn) {
+        try {
+            String return_book_query = "update Books set cardnum = null, available = 1 where isbn = ? and available = 0";
+            PreparedStatement prepared_query = connect.prepareStatement(return_book_query);
+            prepared_query.setString(1, isbn);
             int rows_affected = prepared_query.executeUpdate();
             if (rows_affected > 0) return true;
         } catch (Exception e) { /*Ignore */ }

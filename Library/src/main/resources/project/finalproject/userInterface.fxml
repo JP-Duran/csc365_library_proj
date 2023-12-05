@@ -42,6 +42,7 @@
                   <Font name="Monospaced Regular" size="12.0" />
                </font></Label>
             <Button layoutX="525.0" layoutY="30.0" mnemonicParsing="false" onAction="#clearOnAction" text="Clear" />
+            <Label layoutY="6.0" text="Book name:" />
             </children></Pane>
         <BorderPane fx:id="resultsBorderPane" layoutY="149.0" prefHeight="304.0" prefWidth="736.0" />
     </children>
