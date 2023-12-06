@@ -16,6 +16,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import static project.finalproject.projectApplication.connect;
+
 public class userAccountController {
 
     @FXML
@@ -67,7 +72,9 @@ public class userAccountController {
 
     @FXML
     void onResetBttn(ActionEvent event) {
-        if (!(libCardNumTxt.getText().strip()).equals(libCardNum) || !(currPassTxt.getText().strip()).equals(password)){
+        //user_login(libCardNumTxt.getText().strip(),currPassTxt.getText().strip());
+        if (!user_login(libCardNumTxt.getText().strip(),currPassTxt.getText().strip()) ||
+                !libCardNumTxt.getText().equals(libCardNum)){
             infoLbl.setTextFill(Color.RED);
             infoLbl.setText("Enter the correct library card number and password to reset");
         }
@@ -76,11 +83,46 @@ public class userAccountController {
             infoLbl.setText("Password has been reset successfully");
             String oldPass = currPassTxt.getText().strip();
             password = resetPassTxt.getText().strip();
-            //sql to update the database
-            /*
-            enter sql query to update the user's password
-             */
+            update_user_password(libCardNum,password);
         }
+    }
+
+    /*
+     * update user password
+     * PARAMS: cardNum, newPassword
+     * RETURN: true if update successful, false otherwise
+     */
+    public boolean update_user_password(String card_number, String new_pw) {
+        try {
+            String update_password_query = "update Users set upassword = ? where cardNum = ?";
+            PreparedStatement prepared_query = connect.prepareStatement(update_password_query);
+            prepared_query.setString(1, new_pw);
+            prepared_query.setString(2, card_number);
+            int rows_affected = prepared_query.executeUpdate();
+            if (rows_affected > 0) return true;
+        } catch (Exception e) { /*Ignore */ }
+        return false;
+    }
+
+    /* Queries the Users table for a matching username password combo
+     * PARAMS: user_id - the username to query
+     *         user_pw - the password to query
+     * RETURN: true - if user 'user_id' exists and the password 'user_pw' matches their password
+     *         false - if the user does not exist or the password does not match
+     */
+    public boolean user_login(String libCardNum, String user_pw) {
+        try {
+            ResultSet result;
+            String user_id_query = "select Users.upassword from Users where cardNum = ?";
+            PreparedStatement prepared_query = connect.prepareStatement(user_id_query);
+            prepared_query.setString(1, libCardNum);
+            result = prepared_query.executeQuery();
+            // This will throw exception if user does not exist
+            result.next();
+            // System.out.println(result.getString("upassword"));
+            if (user_pw.equals(result.getString("upassword"))) return true;
+        } catch (Exception e) { /*Ignore */ }
+        return false;
     }
 
 }
