@@ -285,8 +285,8 @@ public class userInterfaceController implements Initializable {
                 hBox.setPrefWidth(BOXWIDTH);
                 hBox.setPrefHeight(HBOXHEIGHT);
                 resultVBox.getChildren().add(hBox);
-                System.out.println(resultSet.getString("isbn") + "  " + resultSet.getString("bname") +
-                        "  " + resultSet.getString("genre"));
+                // System.out.println(resultSet.getString("isbn") + "  " + resultSet.getString("bname") +
+                //        "  " + resultSet.getString("genre"));
             }
             System.out.println(bkcount);
             if (bkcount == 0){
